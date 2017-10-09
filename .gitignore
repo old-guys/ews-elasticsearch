@@ -1,0 +1,3 @@
+*.rpm
+temp/
+conf/ews_startup.sh
