@@ -16,6 +16,9 @@ RUN echo "network.bind_host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
+RUN echo "exec command"
+RUN mkdir -p /acs/conf
+
 WORKDIR /usr/share/elasticsearch
 
 RUN rm -rf /var/log/elasticsearch
@@ -26,4 +29,8 @@ EXPOSE 9200 9300
 
 VOLUME /var/lib/elasticsearch
 
-ENTRYPOINT sudo -u elasticsearch /usr/bin/java -Xms2g -Xmx2g -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+AlwaysPreTouch -server -Xss1m -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djna.nosys=true -Djdk.io.permissionsUseCanonicalPath=true -Dio.netty.noUnsafe=true -Dio.netty.noKeySetOptimization=true -Dio.netty.recycler.maxCapacityPerThread=0 -Dlog4j.shutdownHookEnabled=false -Dlog4j2.disable.jmx=true -Dlog4j.skipJansi=true -XX:+HeapDumpOnOutOfMemoryError -Des.path.home=/usr/share/elasticsearch -cp "/usr/share/elasticsearch/lib/*" org.elasticsearch.bootstrap.Elasticsearch -p /var/run/elasticsearch/elasticsearch.pid -Edefault.path.logs=/var/log/elasticsearch -Edefault.path.data=/var/lib/elasticsearch -Edefault.path.conf=/etc/elasticsearch
+COPY entrypoint.sh /app/
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod a+x /entrypoint.sh
+
+ENTRYPOINT /entrypoint.sh

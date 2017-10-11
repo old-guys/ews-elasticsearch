@@ -1,6 +1,6 @@
 ## 聚石塔 spring 镜像
 
-> 用于 java 搜索服务，导入服务
+> 用于 elasticsearch
 
 - https://testerhome.com/topics/2760 docker guide
 - https://www.unixmen.com/install-oracle-java-jdk-8-centos-76-56-4/
@@ -20,23 +20,7 @@ xxxxxxxxx
 ## build docker image from Dockerfile
 
 ```shell
-sudo docker build -t ikcrm/java-spring-boot:1.0.3 .
-sudo docker tag 4b5ce3709c50 registry.acs.aliyun.com/1089176875114090/ikcrm/java-spring-boot:1.0.3
-sudo docker push registry.acs.aliyun.com/1089176875114090/ikcrm/java-spring-boot:1.0.3
-```
-
-## 配置镜像启动脚本
-
-这里是容器里面的启动脚本需要手动配置 `/acs/conf/ews_startup.sh` 可以参见
-
-```shell
-conf/ews_startup.sh.example
-```
-
-## 服务访问地址
-
-```shell
-ik-crm-search-service
-http://crmjavasearch.hz.taeapp.com/ik-crm-search-service/
-http://crmjavasearch.hz-internal.taeapp.com/ik-crm-search-service/
+sudo docker build -t ikcrm/ews-elasticsearch:5.6.0-1 .
+sudo docker tag 2949d4e6eb6a registry.acs.aliyun.com/1089176875114090/ikcrm/ikcrm/ews-elasticsearch:5.6.0-1
+sudo docker push registry.acs.aliyun.com/1089176875114090/ikcrm/ikcrm/ews-elasticsearch:5.6.0-1
 ```
