@@ -24,6 +24,7 @@ WORKDIR /usr/share/elasticsearch
 RUN rm -rf /var/log/elasticsearch
 RUN ln -sf /acs/log /var/log/elasticsearch
 RUN chown elasticsearch:elasticsearch /var/log/elasticsearch
+RUN chown elasticsearch:elasticsearch /var/lib/elasticsearch
 
 EXPOSE 9200 9300
 

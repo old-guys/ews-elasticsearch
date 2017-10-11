@@ -20,7 +20,18 @@ xxxxxxxxx
 ## build docker image from Dockerfile
 
 ```shell
-sudo docker build -t ikcrm/ews-elasticsearch:5.6.0-1 .
-sudo docker tag 2949d4e6eb6a registry.acs.aliyun.com/1089176875114090/ikcrm/ikcrm/ews-elasticsearch:5.6.0-1
-sudo docker push registry.acs.aliyun.com/1089176875114090/ikcrm/ikcrm/ews-elasticsearch:5.6.0-1
+sudo docker build -t ikcrm/ews-elasticsearch:5.6.0-2 .
+sudo docker tag 7c003248f1ab registry.acs.aliyun.com/1089176875114090/ikcrm/ikcrm/ews-elasticsearch:5.6.0-2
+sudo docker push registry.acs.aliyun.com/1089176875114090/ikcrm/ikcrm/ews-elasticsearch:5.6.0-2
+```
+
+## config for elas
+
+```shell
+# https://serverfault.com/questions/649577/how-can-i-permanently-set-ulimit-n-8192-in-centos-7
+# /etc/init/acswatch.conf
+# /etc/sysconfig/docker # --default-ulimit nofile=65536:65536
+# /etc/sysctl.conf
+sudo sysctl -w vm.max_map_count=262144
+sudo ulimit -n 65536
 ```
